@@ -1,0 +1,26 @@
+{
+  "name": "react-yangui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itzhangjia/react-yang.ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itzhangjia/react-yang.ui/issues"
+  },
+  "homepage": "https://github.com/itzhangjia/react-yang.ui#readme",
+  "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}
