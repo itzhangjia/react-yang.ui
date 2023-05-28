@@ -1,6 +1,5 @@
-import React, { ReactElement } from 'react'
-import ReactDom from 'react-dom'
-import ReactDOM from 'react-dom';
+import React, { ReactElement, ReactNode } from 'react'
+import ReactDOM from 'react-dom'
 import './dialog.scss'
 import scopedClassMaker from '../classes'
 import Icon from '../icon/icon'
@@ -21,7 +20,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     }
   }
   const scopedClass = scopedClassMaker('yang-dialog')
-  const content=props.open ? (
+  const content = props.open ? (
     <>
       <div className={scopedClass('mask')} onClick={onClickCloseMask}></div>
       <div className={scopedClass()}>
@@ -30,25 +29,60 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
         </div>
         <header className={scopedClass('header')}>提示</header>
         <main className={scopedClass('main')}>{props.children}</main>
-        <footer className={scopedClass('footer')}>
-          {props.buttons&&props.buttons.map((item, index) =>
-            React.cloneElement(item, { key: index })
-          )}
-        </footer>
+        {props.buttons && props.buttons.length > 0 && (
+          <footer className={scopedClass('footer')}>
+            {props.buttons.map((item, index) =>
+              React.cloneElement(item, { key: index })
+            )}
+          </footer>
+        )}
       </div>
     </>
   ) : null
-  return ReactDom.createPortal(content,document.body)
+  return ReactDOM.createPortal(content, document.body)
 }
-export const alert=(content:string)=>{
-    const component=<Dialog open={true} onCancel={()=>{
-        ReactDom.render(React.cloneElement(component,{open:false}),targetDiv);
-        ReactDom.unmountComponentAtNode(targetDiv)
-        targetDiv.remove()
-    }}>{content}</Dialog>
-    const targetDiv=document.createElement("div")
-    document.body.append(targetDiv)
-    ReactDOM.render(component,targetDiv)
+export const Modal = (
+  content: ReactNode,
+  buttons?: ReactElement[],
+  afterClose?: () => void
+) => {
+  const onCancel = () => {
+    ReactDOM.render(React.cloneElement(component, { open: false }), targetDiv)
+    ReactDOM.unmountComponentAtNode(targetDiv)
+    targetDiv.remove()
+  }
+  const component = (
+    <Dialog
+      open={true}
+      onCancel={()=>{onCancel();afterClose&&afterClose()}}
+      buttons={buttons}
+    >
+      {content}
+    </Dialog>
+  )
+  const targetDiv = document.createElement('div')
+  document.body.append(targetDiv)
+  ReactDOM.render(component, targetDiv)
+  return onCancel
+}
+export const alert = (content: string) => {
+  const button = <button onClick={() => onCancel()}>确定</button>
+  const onCancel = Modal(content, [button])
+}
+export const confirm = (content: string, yes: () => void, no: () => void) => {
+  const onYes = () => {
+    close()
+    yes && yes()
+  }
+  const onNo = () => {
+    close()
+    no && no()
+  }
+  const buttons = [
+    <button onClick={onYes}>yes</button>,
+    <button onClick={onNo}>no</button>,
+  ]
+  const close = Modal(content, buttons, no)
 }
 Dialog.defaultProps = {
   closeONclickMask: true,
