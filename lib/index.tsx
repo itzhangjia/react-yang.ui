@@ -5,7 +5,7 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import IconExample from "./icon"
 import DialogExample from './dialog';
 // import ButtonExample from './lib/button.example';
-// import LayoutExample from './lib/layout/layout.example';
+import LayoutExample from './layout';
 
 
 ReactDOM.render(
@@ -39,7 +39,7 @@ ReactDOM.render(
           <Route path="/icon" component={IconExample}/>
            {/* <Route path="/button" component={ButtonExample}/> */}
           <Route path="/dialog" component={DialogExample}/>
-          {/* <Route path="/layout" component={LayoutExample}/>  */}
+          <Route path="/layout" component={LayoutExample}/> 
         </main>
       </div>
     </div>
