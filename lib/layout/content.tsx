@@ -1,10 +1,13 @@
 import React from 'react'
 import scopedClassMaker from "../classes"
+interface Props extends React.HTMLAttributes<HTMLElement>{
 
-export default function content() {
+}
+ const Content:React.FunctionComponent<Props>=(props)=> {
     const scopedClass = scopedClassMaker('yang-layout')
-
+  const {className,...rest}=props
   return (
-    <div className={scopedClass("layout-content")}>content</div>
+    <div className={scopedClass("layout-content",{extra:className})} {...rest}>content</div>
   )
 }
+export default Content

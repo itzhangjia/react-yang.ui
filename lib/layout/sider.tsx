@@ -3,11 +3,11 @@ import scopedClassMaker from "../classes"
 interface Props extends React.HTMLAttributes<HTMLElement>{
 
 }
- const Footer:React.FunctionComponent<Props>=(props)=> {
+ const Sider:React.FunctionComponent<Props>=(props)=> {
     const scopedClass = scopedClassMaker('yang-layout')
   const {className,...rest}=props
   return (
-    <div className={scopedClass("layout-footer",{extra:className})} {...rest}>footer</div>
+    <div className={scopedClass("layout-sider",{extra:className})} {...rest}>sider</div>
   )
 }
-export default Footer
+export default Sider

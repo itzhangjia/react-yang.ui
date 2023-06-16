@@ -1,0 +1,20 @@
+@import "../helper";
+.yang-layout{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    &-layout-content{
+        flex-grow: 1;
+    }
+    &.hasSider{
+        flex-direction: row;
+        .yang-layout{
+            flex-direction: column;
+        }
+    }
+    & &{
+        flex-grow: 1;
+        border: 1px solid blue;
+        flex-direction: row;
+    }
+}
