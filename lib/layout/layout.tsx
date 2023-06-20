@@ -7,19 +7,21 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 const Layout: React.FunctionComponent<Props> = (props) => {
   const scopedClass = scopedClassMaker('yang-layout')
   const { className, ...rest } = props
-  let hasSider = false
-  if ((props.children as Array<ReactElement>).length) {
-   (props.children as Array<ReactElement>).map((item) => {
-      if (item.type === Sider) {
-        hasSider = true
-      }
-    })
-  }
+  // let hasSider = false
+  // if ((props.children as Array<ReactElement>).length) {
+  //  (props.children as Array<ReactElement>).map((item) => {
+  //     if (item.type === Sider) {
+  //       hasSider = true
+  //     }
+  //   })
+  // }
+  const children=props.children as Array<ReactElement>
+  const hasSider=children.some((item)=>item.type==Sider)
 
   return (
     <div
-      className={scopedClass('', {
-        extra: [className,hasSider&&'hasSider'].filter((item)=>item).join(' '),
+      className={scopedClass({"":true,hasSider:hasSider}, {
+        extra: className,
       })}
       {...rest}
     >

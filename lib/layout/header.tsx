@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLElement>{
     const scopedClass = scopedClassMaker('yang-layout')
   const {className,...rest}=props
   return (
-    <div className={scopedClass("layout-header",{extra:className})} {...rest}>header</div>
+    <div className={scopedClass("header",{extra:className})} {...rest}>header</div>
   )
 }
 export default Header

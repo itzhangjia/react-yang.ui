@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLElement>{
     const scopedClass = scopedClassMaker('yang-layout')
   const {className,...rest}=props
   return (
-    <div className={scopedClass("layout-footer",{extra:className})} {...rest}>footer</div>
+    <div className={scopedClass("footer",{extra:className})} {...rest}>footer</div>
   )
 }
 export default Footer
