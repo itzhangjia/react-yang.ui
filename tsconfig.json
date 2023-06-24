@@ -23,7 +23,7 @@
       "noUnusedLocals": true
     },
     "include": [
-      "lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.tsx"
+      "lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.tsx", "lib/**/*"
     ],
     "exclude": [
       "node_modules",

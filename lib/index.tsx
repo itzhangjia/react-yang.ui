@@ -1,24 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./index.scss"
+import "./page.scss"
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import IconExample from "./icon"
 import DialogExample from './dialog';
 // import ButtonExample from './lib/button.example';
 import LayoutExample from './layout';
-
+import Layout, {Content, Footer, Header, Sider} from './layout/layout';
+const yang=require("./yang.png")
 
 ReactDOM.render(
   <Router>
-    <div>
-      <header>
-        <div className="logo">
-          yang
+    <Layout>
+      <Header className="side-header">
+        <div className="side-logo">
+          <img style={{width:50}} src={yang} alt="" /><span>yang</span>
         </div>
-
-      </header>
-      <div>
-        <aside>
+      </Header>
+      <Layout>
+        <Sider className="side-sider">
           <h2>组件</h2>
           <ul>
             <li>
@@ -34,14 +35,15 @@ ReactDOM.render(
               <Link to="/layout">布局</Link>
             </li>
           </ul>
-        </aside>
-        <main>
+        </Sider>
+        <Content className="side-main">
           <Route path="/icon" component={IconExample}/>
            {/* <Route path="/button" component={ButtonExample}/> */}
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/layout" component={LayoutExample}/> 
-        </main>
-      </div>
-    </div>
+        </Content>
+      </Layout>
+      <Footer className="side-footer">123</Footer>
+    </Layout>
   </Router>
   , document.querySelector('#root'));

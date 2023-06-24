@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLElement>{
     const scopedClass = scopedClassMaker('yang-layout')
   const {className,...rest}=props
   return (
-    <div className={scopedClass("sider",{extra:className})} {...rest}>sider</div>
+    <div className={scopedClass("sider",{extra:className})} {...rest}>{props.children}</div>
   )
 }
 export default Sider

@@ -11,7 +11,7 @@
         flex-direction: row;
     }
     &-hasSider{
-        flex-direction: row;
+        flex-direction: row!important;
         .yang-layout{
             flex-direction: column;
         }
