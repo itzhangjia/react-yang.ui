@@ -50,14 +50,24 @@ a{
         font-size: 18px;
     }
     ul{
-        padding:0 $padding;
+        // padding:0 $padding;
         min-width: 12em;
         li{
-            padding: $padding 0px ;
+            
+            a{
+                display: block;
+                padding:8px $padding;
+                color: #333;
+                &:hover{
+                   color: $main-color; 
+                }
+                &.active{
+                    color: white;
+                    background: $main-color;;
+                }
+            }
         }
-        a{
-            color: $main-color;
-        }
+        
     }
 }
 .side-footer{

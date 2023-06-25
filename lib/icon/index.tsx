@@ -1,8 +1,9 @@
 import React from 'react'
 import Icon from './icon'
 
-export default function () {
+const  index:React.FunctionComponent= ()=> {
   return (
         <Icon name='wechat'></Icon>
   )
 }
+export default index

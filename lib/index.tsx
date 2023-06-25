@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "./index.scss"
 import "./page.scss"
-import {HashRouter as Router, Route, Link} from 'react-router-dom';
-import IconExample from "./icon"
+import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import IconExample from "./icon/iconDemo"
 import DialogExample from './dialog';
 // import ButtonExample from './lib/button.example';
 import LayoutExample from './layout';
@@ -23,16 +23,16 @@ ReactDOM.render(
           <h2>组件</h2>
           <ul>
             <li>
-              <Link to="/icon">Icon</Link>
+              <NavLink to="/icon">Icon</NavLink>
             </li>
             {/* <li>
               <Link to="/button">Button</Link>
             </li> */}
             <li>
-              <Link to="/dialog">对话框</Link>
+              <NavLink to="/dialog">对话框</NavLink>
             </li>
             <li>
-              <Link to="/layout">布局</Link>
+              <NavLink to="/layout">布局</NavLink>
             </li>
           </ul>
         </Sider>
