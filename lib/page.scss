@@ -17,11 +17,15 @@ h1,h2,h3,h4,h5,h6{
 ul,ol{
     list-style: none;
 }
+pre{
+    font-family: "Fira Code Medium", Consolas, monospace;
+}
 a{
     text-decoration: none;color: inherit;
 }
-.page{
+.side-page{
     background-color: #ffffff;
+    min-height: 100vh;
 }
 .side-header{
     background-color: #eeeeee;
@@ -76,4 +80,7 @@ a{
     color: #666;
     padding: 16px 0;
     border: 1px solid $border-color ;
+}
+.example{
+    padding: 16px 0;
 }

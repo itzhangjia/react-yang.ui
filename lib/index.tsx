@@ -18,7 +18,7 @@ ReactDOM.render(
           <img style={{width:50}} src={yang} alt="" /><span>yang</span>
         </div>
       </Header>
-      <Layout>
+      <Layout className="side-page">
         <Sider className="side-sider">
           <h2>组件</h2>
           <ul>
