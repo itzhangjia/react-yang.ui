@@ -8,6 +8,7 @@ import DialogExample from './dialog';
 // import ButtonExample from './lib/button.example';
 import LayoutExample from './layout';
 import Layout, {Content, Footer, Header, Sider} from './layout/layout';
+import FormExample from './form/form.example';
 const yang=require("./yang.png")
 
 ReactDOM.render(
@@ -34,6 +35,9 @@ ReactDOM.render(
             <li>
               <NavLink to="/layout">布局</NavLink>
             </li>
+            <li>
+              <NavLink to="/form">表单</NavLink>
+            </li>
           </ul>
         </Sider>
         <Content className="side-main">
@@ -41,6 +45,8 @@ ReactDOM.render(
            {/* <Route path="/button" component={ButtonExample}/> */}
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/layout" component={LayoutExample}/> 
+          <Route path="/form" component={FormExample}/> 
+
         </Content>
       </Layout>
       <Footer className="side-footer">123</Footer>
