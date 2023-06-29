@@ -4,9 +4,9 @@ import "./index.scss"
 import "./page.scss"
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import IconExample from "./icon/iconDemo"
-import DialogExample from './dialog';
+import DialogExample from './dialog/dialogDemo';
 // import ButtonExample from './lib/button.example';
-import LayoutExample from './layout';
+import LayoutExample from './layout/layoutDemo';
 import Layout, {Content, Footer, Header, Sider} from './layout/layout';
 import FormExample from './form/form.example';
 const yang=require("./yang.png")
