@@ -16,6 +16,7 @@ const validator = (formData: anyObject, rules: Rules) => {
     }
     errors[key].push(reason)
   }
+  //还得加条件判断
   rules.forEach((item) => {
     const value = formData[item.name]
     if (item.required) {
