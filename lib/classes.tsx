@@ -6,6 +6,10 @@ interface options {
 interface ClassToggles {
   [K: string]: boolean
 }
+function classes(...names:(string|undefined)[]){
+  return names.filter(Boolean).join(" ")
+}
+export {classes} 
 function scopedClassMaker(perfix: string) {
   return function x(name: string | ClassToggles, options?: options) {
     // let copyName;

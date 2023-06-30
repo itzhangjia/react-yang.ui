@@ -1,4 +1,8 @@
 import React from 'react'
+import Input from '../input/input'
+import {classes} from "../classes"
+import "./form.scss"
+
 export interface anyObject {
   [key: string]: string
 }
@@ -8,7 +12,7 @@ interface Props {
   buttons: any
   onFinish: (object: anyObject) => void
   onSubmit: React.FormEventHandler
-  errors:any
+  errors: any
 }
 const Form: React.FunctionComponent<Props> = (props) => {
   const InputChange = (key: string, value: string) => {
@@ -20,19 +24,24 @@ const Form: React.FunctionComponent<Props> = (props) => {
   }
   return (
     <form onSubmit={onSubmit}>
-      {props.fields.map((item, index) => (
-        <div key={index}>
-          {item.label}
-          <input
-            type={item.input.type}
-            onChange={(e) => InputChange(item.name, e.target.value)}
-            value={props.value[item.name]}
-          ></input>
-          <div>
-          {props.errors[item.name]}
-          </div>
-        </div>
-      ))}
+      <table className="yang-form-table">
+        {props.fields.map((item, index) => (
+          <tr className={classes("yang-form-row")} key={index}>
+            <td className="yang-form-td">
+              <span className="yang-form-label">{item.label}</span>
+              </td>
+            <td className="yang-form-td">
+              <Input
+              className="yang-form-input"
+                type={item.input.type}
+                onChange={(e) => InputChange(item.name, e.target.value)}
+                value={props.value[item.name]}
+              ></Input>
+              <div>{props.errors[item.name]}</div>
+            </td>
+          </tr>
+        ))}
+      </table>
       <div>{props.buttons}</div>
     </form>
   )
