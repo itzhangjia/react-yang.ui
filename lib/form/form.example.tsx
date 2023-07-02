@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
-import Button from "../button/button"
+import Button from '../button/button'
 import { anyObject } from './form'
 import Form from './form'
-import validator from "./validator"
+import validator from './validator'
 const FormExample: React.FunctionComponent = (props) => {
-  const [formData,setFormData] = useState<anyObject>({
+  const nameList=["fanbingbing","yangmi"]
+  const checkName=(name:string,success:(value?:unknown)=>void,reject:()=>void)=>{
+    setTimeout(()=>{
+      if(nameList.includes(name)){
+        success()
+      }else{
+        reject()
+      }
+    },3000)
+  }
+  const [formData, setFormData] = useState<anyObject>({
     userName: '',
     passWord: '',
   })
@@ -12,17 +22,33 @@ const FormExample: React.FunctionComponent = (props) => {
     { name: 'userName', label: '用户名', input: { type: 'text' } },
     { name: 'passWord', label: '密码', input: { type: 'password' } },
   ])
-  const [errors,setErrors]=useState({})
-  const onFinish=(values:anyObject)=>{
+  const [errors, setErrors] = useState({})
+  const onFinish = (values: anyObject) => {
     setFormData(values)
   }
-  const onSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
-    const rules=[{name:"userName",required:true,maxLength:5,minLength:1},{name:"passWord",required:true,maxLength:7,minLength:4,pattern:/[a-zA-Z/]+/}]
-    const errorsResult=validator(formData,rules)
-    console.log(errorsResult);
-    
-    setErrors(errorsResult)
-    
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const rules = [
+      { key: 'userName', required: true, maxLength: 5, minLength: 1 },
+      {
+        key: 'passWord',
+        required: true,
+        maxLength: 7,
+        minLength: 4,
+        pattern: /[a-zA-Z/]+/,
+      },
+      {key:"userName",validator:{
+        name: "required",
+        validatorFn:(username:string)=>{
+          return new Promise<void>((resolve, reject) => {
+            checkName(username,resolve,reject)
+          })
+        }
+      }}
+    ] 
+    validator(formData, rules,(errorsResult)=>{
+      setErrors(errorsResult)
+    })
+   
   }
   return (
     <Form
