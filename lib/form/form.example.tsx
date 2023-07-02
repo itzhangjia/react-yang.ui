@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import Button from '../button/button'
 import { anyObject } from './form'
 import Form from './form'
-import validator from './validator'
+import validator, { noError } from './validator'
 const FormExample: React.FunctionComponent = (props) => {
   const nameList=["fanbingbing","yangmi"]
   const checkName=(name:string,success:(value?:unknown)=>void,reject:()=>void)=>{
     setTimeout(()=>{
       if(nameList.includes(name)){
-        success()
-      }else{
         reject()
+      }else{
+        success()
       }
     },3000)
   }
@@ -23,8 +23,13 @@ const FormExample: React.FunctionComponent = (props) => {
     { name: 'passWord', label: '密码', input: { type: 'password' } },
   ])
   const [errors, setErrors] = useState({})
-  const onFinish = (values: anyObject) => {
+  const onChange = (values: anyObject) => {
     setFormData(values)
+  }
+  const validatorFn=(username:string)=>{
+    return new Promise<string>((resolve, reject) => {
+      checkName(username,resolve,()=>reject("onlyOne"))
+    })
   }
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const rules = [
@@ -36,17 +41,16 @@ const FormExample: React.FunctionComponent = (props) => {
         minLength: 4,
         pattern: /[a-zA-Z/]+/,
       },
-      {key:"userName",validator:{
-        name: "required",
-        validatorFn:(username:string)=>{
-          return new Promise<void>((resolve, reject) => {
-            checkName(username,resolve,reject)
-          })
-        }
-      }}
+      {key:"userName",validatorFn},
+      {key:"userName",validatorFn}
     ] 
     validator(formData, rules,(errorsResult)=>{
+      //表单验证完成
       setErrors(errorsResult)
+      if(noError(errors)){
+        //验证通过
+        console.log("验证通过了");       
+      }
     })
    
   }
@@ -60,7 +64,7 @@ const FormExample: React.FunctionComponent = (props) => {
           <Button>取消</Button>
         </>
       }
-      onFinish={onFinish}
+      onChange={onChange}
       onSubmit={onSubmit}
       errors={errors}
     ></Form>

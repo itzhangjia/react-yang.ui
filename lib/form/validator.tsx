@@ -5,12 +5,9 @@ interface Formrule {
   minLength?: number
   required?: boolean
   pattern?: RegExp
-  validator?: { name: string; validatorFn: (key: string) => Promise<void> }
+  validatorFn?: (username: string) => Promise<string>
 }
-interface error {
-  message?: string
-  promise?: Promise<any>
-}
+type error = string | Promise<string>
 type Rules = Array<Formrule>
 
 //辅助方法 flat
@@ -25,13 +22,22 @@ const flatArr = (arr: Array<any>) => {
   })
   return newArr
 }
-const ObjecetMap = (errors: any) => {
-  let obj: any = {}
-  Object.keys(errors).forEach((item) => {
-    obj[item] = errors[item].map((i: any) => i.message)
-  })
-  return obj
+
+const hasError=(item: [string, undefined] | [string, string]): item is [string, string] =>{
+  return typeof item[1] === 'string';
 }
+const zip=(kvList: Array<[string, string]>)=> {
+  const result: { [key: string]: string[] } = {};
+  kvList.map(([key, value]) => {
+    result[key] = result[key] || [];
+    result[key].push(value);
+  });
+  return result;
+}
+export function noError(errors: any) {
+  return Object.keys(errors).length === 0
+}
+
 const validator = (
   formData: anyObject,
   rules: Rules,
@@ -47,39 +53,49 @@ const validator = (
   //还得加条件判断
   rules.forEach((item) => {
     const value = formData[item.key]
-    if (item.validator) {
-      const promiseResult = item.validator.validatorFn(value)
-      addRules(item.key, { message: '用户名已经存在', promise: promiseResult })
+    if (item.validatorFn) {
+      const promise = item.validatorFn(value)
+      addRules(item.key, promise)
     }
     if (item.required) {
       if (value === undefined || value === '' || value === null) {
-        addRules(item.key, { message: '这是必填哦!' })
+        addRules(item.key, 'required')
       }
     }
     if (item.maxLength) {
       if (value.length > item.maxLength) {
-        addRules(item.key, { message: '太长~' })
+        addRules(item.key, 'maxLength')
       }
     }
     if (item.minLength) {
       if (value.length < item.minLength) {
-        addRules(item.key, { message: '太短~' })
+        addRules(item.key, 'minLength')
       }
     }
     if (item.pattern) {
       if (!item.pattern.test(value)) {
-        addRules(item.key, { message: '格式不对~' })
+        addRules(item.key, 'format')
       }
     }
   })
-
-  const promiseList = flatArr(Object.values(errors))
-    .filter((item: error) => item.promise)
-    .map((v) => v.promise)
-  Promise.all(promiseList).then(
-    () => callBack(ObjecetMap(errors)),
-    () => callBack(ObjecetMap(errors))
+  //先拆分 再合到一起
+  const promiseeArr = flatArr(
+    Object.keys(errors).map((key) => errors[key].map((k: error) => [key, k]))
   )
-  // return errors
+  const newpromiseeArr = promiseeArr.map(([key, promiseOreString]) => {
+    const promise =
+      promiseOreString instanceof Promise
+        ? promiseOreString
+        : Promise.reject(promiseOreString)
+    return promise.then(
+      () => [key, undefined],
+      (reject) => [key, reject]
+    )
+  })
+  console.log(newpromiseeArr)
+
+    Promise.all(newpromiseeArr).then(results => {
+      callBack(zip(results.filter<[string, string]>(hasError)));
+    });
 }
 export default validator
