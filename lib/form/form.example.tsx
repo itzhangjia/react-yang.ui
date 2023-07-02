@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from "../button/button"
 import { anyObject } from './form'
 import Form from './form'
 import validator from "./validator"
@@ -29,8 +30,8 @@ const FormExample: React.FunctionComponent = (props) => {
       fields={fields}
       buttons={
         <>
-          <button type="submit">确定</button>
-          <button>取消</button>
+          <Button type="submit">确定</Button>
+          <Button>取消</Button>
         </>
       }
       onFinish={onFinish}

@@ -13,6 +13,7 @@ interface Props {
   onFinish: (object: anyObject) => void
   onSubmit: React.FormEventHandler
   errors: any
+  validateFirst?:"first"|"all"
 }
 const Form: React.FunctionComponent<Props> = (props) => {
   const InputChange = (key: string, value: string) => {
@@ -37,14 +38,20 @@ const Form: React.FunctionComponent<Props> = (props) => {
                 onChange={(e) => InputChange(item.name, e.target.value)}
                 value={props.value[item.name]}
               ></Input>
-              <div>{props.errors[item.name]}</div>
+              <div className="yang-form-error" >{props.errors[item.name]?(props.validateFirst==="first"?props.errors[item.name][0]:props.errors[item.name].join(",")):<span>&nbsp;</span>}</div>
             </td>
-          </tr>
+          </tr>          
         ))}
+        <tr className="yang-form-tr">
+            <td className="yang-form-td"></td>
+            <td className="yang-form-td"><div>{props.buttons}</div></td>
+          </tr>
       </table>
-      <div>{props.buttons}</div>
+      
     </form>
   )
 }
-
+Form.defaultProps={
+  validateFirst:"first"
+}
 export default Form
