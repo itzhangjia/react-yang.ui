@@ -11,9 +11,9 @@ type error = string | Promise<string>
 type Rules = Array<Formrule>
 
 //辅助方法 flat
-const flatArr = (arr: Array<any>) => {
-  const newArr: any[] = []
-  arr.forEach((item: any) => {
+const flatArr = <T,>(arr: Array<T|T[]>) => {
+  const newArr: T[] = []
+  arr.forEach((item) => {
     if (item instanceof Array) {
       newArr.push(...item)
     } else {

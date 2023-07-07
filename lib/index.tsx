@@ -9,6 +9,7 @@ import DialogExample from './dialog/dialogDemo';
 import LayoutExample from './layout/layoutDemo';
 import Layout, {Content, Footer, Header, Sider} from './layout/layout';
 import FormExample from './form/form.example';
+import ScrollExample from './scroll/scroll.example';
 const yang=require("./yang.png")
 
 ReactDOM.render(
@@ -38,6 +39,9 @@ ReactDOM.render(
             <li>
               <NavLink to="/form">表单</NavLink>
             </li>
+            <li>
+              <NavLink to="/scroll">Scroll</NavLink>
+            </li>
           </ul>
         </Sider>
         <Content className="side-main">
@@ -46,6 +50,7 @@ ReactDOM.render(
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/layout" component={LayoutExample}/> 
           <Route path="/form" component={FormExample}/> 
+          <Route path="/scroll" component={ScrollExample}/> 
 
         </Content>
       </Layout>
