@@ -10,6 +10,7 @@ import LayoutExample from './layout/layoutDemo';
 import Layout, {Content, Footer, Header, Sider} from './layout/layout';
 import FormExample from './form/form.example';
 import ScrollExample from './scroll/scroll.example';
+import TreeExample from './tree/tree.example';
 const yang=require("./yang.png")
 
 ReactDOM.render(
@@ -42,6 +43,9 @@ ReactDOM.render(
             <li>
               <NavLink to="/scroll">Scroll</NavLink>
             </li>
+            <li>
+              <NavLink to="/tree">tree</NavLink>
+            </li>
           </ul>
         </Sider>
         <Content className="side-main">
@@ -51,6 +55,7 @@ ReactDOM.render(
           <Route path="/layout" component={LayoutExample}/> 
           <Route path="/form" component={FormExample}/> 
           <Route path="/scroll" component={ScrollExample}/> 
+          <Route path="/tree" component={TreeExample}/> 
 
         </Content>
       </Layout>
