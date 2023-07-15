@@ -1,50 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tree from './tree'
 
 const treeData = [
-    {
-      title: 'parent 1',
-      key: '0-0',
-      children: [
-        {
-          title: 'parent 1-0',
-          key: '0-0-0',
-          disabled: true,
-          children: [
-            {
-              title: 'leaf',
-              key: '0-0-0-0',
-              disableCheckbox: true,
-            },
-            {
-              title: 'leaf',
-              key: '0-0-0-1',
-            },
-          ],
-        },
-        {
-          title: 'parent 1-1',
-          key: '0-0-1',
-          children: [
-            {
-              title: (
-                <span
-                  style={{
-                    color: '#1890ff',
-                  }}
-                >
-                  sss
-                </span>
-              ),
-              key: '0-0-1-0',
-            },
-          ],
-        },
-      ],
-    },
-  ];
-export default ()=> {
+  {
+    text: '1',
+    value: '1',
+    children: [
+      {
+        text: '1.1',
+        value: '1.1',
+        children: [
+          { text: '1.1.1', value: '1.1.1' },
+          { text: '1.1.2', value: '1.1.2' },
+        ],
+      },
+      { text: '1.2', value: '1.2' },
+    ],
+  },
+  {
+    text: '11',
+    value: '11',
+  },
+  {
+    text: '2',
+    value: '2',
+    children: [
+      { text: '2.1', value: '2.1' },
+      { text: '2.2', value: '2.2' },
+    ],
+  },
+]
+export default () => {
+  const [selectedValues, setSelectedValues] = useState("1")
+  // const onChange = (item: treedata, value: boolean) => {
+  //   console.log(item, value)
+  //   if (value) {
+  //     console.log([...selectedValues, item.value])
+
+  //     setSelectedValues([...selectedValues, item.value])
+  //   } else {
+  //     setSelectedValues((v) => {
+  //       return v.filter((i) => {
+  //         return i !== item.value
+  //       })
+  //     })
+  //   }
+  // }
   return (
-    <Tree treeData={treeData}></Tree>
+    <div style={{ width: 300 }}>
+      tree
+      <h1>展示数据</h1>
+      <Tree
+        treeData={treeData}
+        selected={selectedValues}
+        multiple={false}
+        onChange={(values:string)=>setSelectedValues(values)}
+      ></Tree>
+    </div>
   )
 }
