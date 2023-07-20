@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
 
 const useUpdates = (dep: any, fn: () => void) => {
-    const [count, setCount] = useState(0)
+    const isFirst = useRef(true)
     useEffect(() => {
-        setCount(count + 1)
-    }, [dep])
-    useEffect(() => {
+        if (isFirst.current) {
+            isFirst.current = false
+            return
+        }
         fn()
-    }, [count])
+    }, [dep])
 }
 export default useUpdates

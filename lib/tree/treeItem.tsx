@@ -1,5 +1,6 @@
-import React, { ChangeEventHandler, useState } from "react"
+import React, { ChangeEventHandler, useRef, useState } from "react"
 import scopedClassMaker from '../classes'
+import useUpdates from "../../lib/hooks/useUpdates";
 
 interface Props {
     item: treedata;
@@ -14,6 +15,40 @@ const RenderTree: React.FC<Props> = (props) => {
         ['level-' + level]: true,
         item: true,
     }
+    const divRef = useRef<HTMLDivElement>(null);
+    useUpdates(expand, () => {
+        if (!divRef.current) { return; }
+        if (expand) {
+            // divRef.current.style.position = 'absolute';
+            // divRef.current.style.opacity = '0';
+            divRef.current.style.height = 'auto';
+            const { height } = divRef.current.getBoundingClientRect();
+            // divRef.current.style.position = '';
+            // divRef.current.style.opacity = '';
+            divRef.current.style.height = '0px';
+            divRef.current.getBoundingClientRect();
+            divRef.current.style.height = height + 'px';
+            // const afterExpand = () => {
+            //     if (!divRef.current) { return; }
+            //     divRef.current.style.height = '';
+            //     divRef.current.classList.add('yang-tree-children-present');
+            //     divRef.current.removeEventListener('transitionend', afterExpand);
+            // };
+            // divRef.current.addEventListener('transitionend', afterExpand);
+        } else {
+            const { height } = divRef.current.getBoundingClientRect();
+            divRef.current.style.height = height + 'px';
+            divRef.current.getBoundingClientRect();
+            divRef.current.style.height = '0px';
+            // const afterCollapse = () => {
+            //     if (!divRef.current) { return; }
+            //     divRef.current.style.height = '';
+            //     divRef.current.classList.add('yang-tree-gone');
+            //     divRef.current.removeEventListener('transitionend', afterCollapse);
+            // };
+            // divRef.current.addEventListener('transitionend', afterCollapse);
+        }
+    })
     const checked = treeProps.multiple
         ? treeProps.selected.includes(item.value)
         : treeProps.selected === item.value
@@ -58,7 +93,7 @@ const RenderTree: React.FC<Props> = (props) => {
                     </>
                 )}
             </label>
-            <div className={scopedClass({ children: true, gone: !expand })}>
+            <div ref={divRef} className={scopedClass({ children: true, gone: !expand })}>
                 {item.children &&
                     item.children.map((item) => <RenderTree key={item.value} item={item} level={level + 1} treeProps={treeProps} ></RenderTree>)}
             </div>

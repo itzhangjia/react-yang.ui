@@ -2,23 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "./index.scss"
 import "./page.scss"
-import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import IconExample from "./icon/iconDemo"
 import DialogExample from './dialog/dialogDemo';
 // import ButtonExample from './lib/button.example';
 import LayoutExample from './layout/layoutDemo';
-import Layout, {Content, Footer, Header, Sider} from './layout/layout';
+import Layout, { Content, Footer, Header, Sider } from './layout/layout';
 import FormExample from './form/form.example';
 import ScrollExample from './scroll/scroll.example';
 import TreeExample from './tree/tree.example';
-const yang=require("./yang.png")
+import CitySelectExample from './citySelect/citySelect.examle';
+const yang = require("./yang.png")
 
 ReactDOM.render(
   <Router>
     <Layout>
       <Header className="side-header">
         <div className="side-logo">
-          <img style={{width:50}} src={yang} alt="" /><span>yang</span>
+          <img style={{ width: 50 }} src={yang} alt="" /><span>yang</span>
         </div>
       </Header>
       <Layout className="side-page">
@@ -46,16 +47,20 @@ ReactDOM.render(
             <li>
               <NavLink to="/tree">tree</NavLink>
             </li>
+            <li>
+              <NavLink to="/city">city</NavLink>
+            </li>
           </ul>
         </Sider>
         <Content className="side-main">
-          <Route path="/icon" component={IconExample}/>
-           {/* <Route path="/button" component={ButtonExample}/> */}
-          <Route path="/dialog" component={DialogExample}/>
-          <Route path="/layout" component={LayoutExample}/> 
-          <Route path="/form" component={FormExample}/> 
-          <Route path="/scroll" component={ScrollExample}/> 
-          <Route path="/tree" component={TreeExample}/> 
+          <Route path="/icon" component={IconExample} />
+          {/* <Route path="/button" component={ButtonExample}/> */}
+          <Route path="/dialog" component={DialogExample} />
+          <Route path="/layout" component={LayoutExample} />
+          <Route path="/form" component={FormExample} />
+          <Route path="/scroll" component={ScrollExample} />
+          <Route path="/tree" component={TreeExample} />
+          <Route path="/city" component={CitySelectExample} />
 
         </Content>
       </Layout>

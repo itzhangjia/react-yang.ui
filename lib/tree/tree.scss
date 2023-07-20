@@ -1,47 +1,57 @@
 .yang-tree {
-    &-item {
-      border: 1px solid;
-      line-height: 1.5;
-    }
-    &-level-1 {
-      .yang-tree-text {
-        padding-left: 0;
-      }
-    }
-    &-level-2 {
-      .yang-tree-text {
-        padding-left: 1em;
-      }
-    }
-    &-level-3 {
-      .yang-tree-text {
-        padding-left: 2em;
-      }
-    }
-    &-level-4 {
-      .yang-tree-text {
-        padding-left: 3em;
-      }
-    }
-    &-level-5 {
-      .yang-tree-text {
-        padding-left: 3em;
-      }
-    }
-    &-text {
-      display: block;
-      &:hover {
-        background: yellow;
-      }
-    }
-    &-children {
-      overflow: hidden;
-      transition: height 200ms;
-      &-gone {
-        height: 0;
-      }
-    }
-    &-gone {
-        height: 0;
-      }
+  &-item {
+    border: 1px solid;
+    line-height: 1.5;
   }
+
+  &-level-1 {
+    .yang-tree-text {
+      padding-left: 0;
+    }
+  }
+
+  &-level-2 {
+    .yang-tree-text {
+      padding-left: 1em;
+    }
+  }
+
+  &-level-3 {
+    .yang-tree-text {
+      padding-left: 2em;
+    }
+  }
+
+  &-level-4 {
+    .yang-tree-text {
+      padding-left: 3em;
+    }
+  }
+
+  &-level-5 {
+    .yang-tree-text {
+      padding-left: 3em;
+    }
+  }
+
+  &-text {
+    display: block;
+
+    &:hover {
+      background: yellow;
+    }
+  }
+
+  &-children {
+    overflow: hidden;
+    transition: height 500ms;
+
+    &-gone {
+      height: 0;
+    }
+  }
+
+  &-gone {
+    height: 0;
+  }
+}
