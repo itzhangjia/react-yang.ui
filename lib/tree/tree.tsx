@@ -8,11 +8,17 @@ export interface treedata {
 }
 
 const Tree: React.FunctionComponent<TreeProps> = (props) => {
-
+  const onItemChange = (values: string[] | string) => {
+    if (props.multiple) {
+      props.onChange(Array.from(new Set(values)) as string[]);
+    } else {
+      props.onChange(values as string);
+    }
+  };
   return (
     <div>
       {props.treeData.map((item) => {
-        return <TreeItem key={item.value} treeProps={props} item={item} level={1} />
+        return <TreeItem onItemChange={onItemChange} key={item.value} treeProps={props} item={item} level={1} />
       })}
     </div>
   )

@@ -31,7 +31,7 @@ const treeData = [
   },
 ]
 export default () => {
-  const [selectedValues, setSelectedValues] = useState("1")
+  const [selectedValues, setSelectedValues] = useState(["1"])
   // const onChange = (item: treedata, value: boolean) => {
   //   console.log(item, value)
   //   if (value) {
@@ -53,8 +53,8 @@ export default () => {
       <Tree
         treeData={treeData}
         selected={selectedValues}
-        multiple={false}
-        onChange={(values:string)=>setSelectedValues(values)}
+        multiple={true}
+        onChange={(values: string[]) => setSelectedValues(values)}
       ></Tree>
     </div>
   )
