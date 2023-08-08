@@ -12,6 +12,7 @@ import FormExample from './form/form.example';
 import ScrollExample from './scroll/scroll.example';
 import TreeExample from './tree/tree.example';
 import CitySelectExample from './citySelect/citySelect.examle';
+import DatePicker from "./datePicker/datePicker"
 const yang = require("./yang.png")
 
 ReactDOM.render(
@@ -50,6 +51,9 @@ ReactDOM.render(
             <li>
               <NavLink to="/city">city</NavLink>
             </li>
+            <li>
+              <NavLink to="/datePicker">datePicker</NavLink>
+            </li>
           </ul>
         </Sider>
         <Content className="side-main">
@@ -61,7 +65,7 @@ ReactDOM.render(
           <Route path="/scroll" component={ScrollExample} />
           <Route path="/tree" component={TreeExample} />
           <Route path="/city" component={CitySelectExample} />
-
+          <Route path="/datePicker" component={DatePicker} />
         </Content>
       </Layout>
       <Footer className="side-footer">123</Footer>
